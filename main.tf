@@ -17,6 +17,9 @@ locals {
   workspaces = {
     terraform-cloud = {
       description = "Terraform Cloud organization and workspaces"
+      vcs_settings = {
+        visibility = "public"
+      }
     }
     marketing-site = {
       description = "readycloudconsulting.com marketing site infrastructure"

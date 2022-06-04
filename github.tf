@@ -3,6 +3,6 @@ resource "github_repository" "this" {
 
   name               = each.key
   description        = try(each.value.description, null)
-  visibility         = "private"
+  visibility         = try(each.value.vcs_settings.visibility, "private")
   gitignore_template = "Terraform"
 }
