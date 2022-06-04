@@ -3,6 +3,6 @@ provider "tfe" {
 }
 
 provider "github" {
-  token        = var.github_oauth_token
-  organization = "readycloudconsulting"
+  token = var.github_oauth_token
+  owner = "readycloudconsulting"
 }
