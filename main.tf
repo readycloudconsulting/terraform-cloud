@@ -4,12 +4,13 @@ resource "tfe_organization" "this" {
 }
 
 resource "tfe_oauth_client" "this" {
-  name             = "github"
-  organization     = tfe_organization.this.name
+  name         = "github"
+  organization = tfe_organization.this.name
+
+  service_provider = "github"
   api_url          = "https://api.github.com"
   http_url         = "https://github.com"
   oauth_token      = var.github_oauth_token
-  service_provider = "github"
 }
 
 locals {
@@ -28,7 +29,7 @@ resource "tfe_workspace" "this" {
   for_each = local.workspaces
 
   name                  = each.key
-  description           = try(each.key["description"], null)
+  description           = try(each.key.description, null)
   organization          = tfe_organization.this.name
   file_triggers_enabled = false
 
