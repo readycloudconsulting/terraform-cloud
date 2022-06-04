@@ -29,9 +29,6 @@ locals {
     }
     core-infrastructure = {
       description = "Core infrastucture shared across all properties"
-      vcs_repo = {
-        identifier = github_repository.this["core-infrastructure"].fullname
-      }
     }
   }
 }
@@ -44,13 +41,18 @@ resource "tfe_workspace" "this" {
   organization          = tfe_organization.this.name
   file_triggers_enabled = false
 
-  dynamic "vcs_repo" {
-    for_each = [each.value.vcs_repo]
-
-    content {
-      identifier     = vcs_repo.value.identifier
-      branch         = try(vcs_repo.value.branch, "main")
-      oauth_token_id = tfe_oauth_client.this.oauth_token_id
-    }
+  vcs_repo {
+    identifier     = try(each.value.vcs_repo.value.identifier, github_repository.this["core-infrastructure"].fullname)
+    branch         = try(each.value.vcs_repo.branch, "main")
+    oauth_token_id = tfe_oauth_client.this.oauth_token_id
   }
+  # dynamic "vcs_repo" {
+  #   for_each = [each.value.vcs_repo]
+
+  #   content {
+  #     identifier     = try(vcs_repo.value.identifier, github_repository.this["core-infrastructure"].fullname)
+  #     branch         = try(vcs_repo.value.branch, "main")
+  #     oauth_token_id = tfe_oauth_client.this.oauth_token_id
+  #   }
+  # }
 }
