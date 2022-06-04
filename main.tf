@@ -30,7 +30,7 @@ locals {
     core-infrastructure = {
       description = "Core infrastucture shared across all properties"
       vcs_repo = {
-        identifier = "readycloudconsulting/core-infrastructure"
+        identifier = github_repository.this["core-infrastructure"].fullname
       }
     }
   }

@@ -11,5 +11,9 @@ terraform {
       source  = "hashicorp/tfe"
       version = "~> 0.31"
     }
+    github = {
+      source  = "integrations/github"
+      version = "~> 4.0"
+    }
   }
 }
