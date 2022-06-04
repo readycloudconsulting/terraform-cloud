@@ -42,7 +42,7 @@ resource "tfe_workspace" "this" {
   file_triggers_enabled = false
 
   vcs_repo {
-    identifier     = try(each.value.vcs_repo.value.identifier, github_repository.this["core-infrastructure"].full_name)
+    identifier     = try(each.value.vcs_repo.value.identifier, github_repository.this[each.key].full_name)
     branch         = try(each.value.vcs_repo.branch, "main")
     oauth_token_id = tfe_oauth_client.this.oauth_token_id
   }
