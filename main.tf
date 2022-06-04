@@ -19,7 +19,12 @@ locals {
       description = "Terraform Cloud organization and workspaces"
       vcs_repo = {
         identifier = "readycloudconsulting/terraform-cloud"
-        branch     = "main"
+      }
+    }
+    marketing-site = {
+      description = "readycloudconsulting.com marketing site infrastructure"
+      vcs_repo = {
+        identifier = "readycloudconsulting/marketing-site"
       }
     }
   }
@@ -38,7 +43,7 @@ resource "tfe_workspace" "this" {
 
     content {
       identifier     = vcs_repo.value.identifier
-      branch         = vcs_repo.value.branch
+      branch         = try(vcs_repo.value.branch, "main")
       oauth_token_id = tfe_oauth_client.this.oauth_token_id
     }
   }
