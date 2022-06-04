@@ -7,6 +7,6 @@ resource "github_repository" "this" {
 
   name               = "readycloudconsulting/${each.key}"
   description        = try(each.value.description, null)
-  visibility         = private
+  visibility         = "private"
   gitignore_template = "Terraform"
 }
