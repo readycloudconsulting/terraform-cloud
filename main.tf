@@ -27,6 +27,12 @@ locals {
         identifier = "readycloudconsulting/marketing-site"
       }
     }
+    core-infrastructure = {
+      description = "Core infrastucture shared across all properties"
+      vcs_repo = {
+        identifier = "readycloudconsulting/core-infrastructure"
+      }
+    }
   }
 }
 
